@@ -6,9 +6,12 @@ import { getErrorMessage } from "../utils";
 
 const isDev =  import .meta.env.DEV;
 const apiKey = import .meta.env.VITE_WEATHER_API_KEY;
+const baseURL = import.meta.env.VITE_WEATHER_BASE_URL;
+
+const prefix = '/api'
 
 export const httpClient = axios.create({
-    baseURL: apiKey,
+    baseURL: isDev ? prefix : baseURL,
     timeout: 5000,
 });
 
