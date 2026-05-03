@@ -1,4 +1,4 @@
-import {API_ERRORS} from "../api-error-messages.ts";
+import {API_ERRORS} from "../consts/api-error-messages.const.ts";
 
 
 export const getErrorMessage = (code?: number | undefined): string => {
