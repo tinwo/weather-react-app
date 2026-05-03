@@ -6,7 +6,7 @@ import type {LanguageCode} from "../types";
 export const useCurrentWeather = () => {
     const { params } = useWeatherParams();
     return useQuery({
-        queryKey: ['q', params.query, params.lang],
+        queryKey: ['weather','current', params.query, params.lang],
         queryFn: (): Promise<any> => WeatherService.getCurrentWeather({
             city: params.query,
             lang: params.lang as LanguageCode
