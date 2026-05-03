@@ -1,7 +1,14 @@
 import './App.css'
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
-function App() {
-    return <></>
+const queryClient = new QueryClient();
+
+
+export const App = () => {
+    return (
+        <QueryClientProvider client={queryClient}>
+
+        </QueryClientProvider>
+    )
 }
 
-export default App
