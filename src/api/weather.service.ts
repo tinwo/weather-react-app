@@ -4,47 +4,47 @@ import type {CurrentWeatherDTO, ForecastWeatherDTO, FutureWeatherDTO, SearchWeat
 export class WeatherService {
     // Current
     static async getCurrentWeather(dto: CurrentWeatherDTO): Promise<any> {
-
-        const url = 'current.json';
+        const urlSegment = 'current.json';
         const params = {
             q: dto.city,
             land: dto?.lang
         };
 
-        const {data} = await httpClient.get(url, {params});
+        const {data} = await httpClient.get(urlSegment, {params});
 
         return data;
     }
 
     // Search
     static async search(dto: SearchWeatherDTO): Promise<any> {
-        const url = 'search.json';
+        const urlSegment = 'search.json';
         const params = {
             q: dto.query,
         };
 
-        const {data} = await httpClient.get(url, {params});
+        const {data} = await httpClient.get(urlSegment, {params});
 
         return data;
     }
 
     // Future
     static async getFuture(dto: FutureWeatherDTO): Promise<any> {
-        const url = 'search.json';
+        const urlSegment = 'search.json';
         const params = {
             q: dto.query,
             dt: dto?.dt,
             lang:  dto?.lang,
         };
 
-        const {data} = await httpClient.get(url, {params});
+        const {data} = await httpClient.get(urlSegment, {params});
 
         return data;
     }
 
     // Forecast
     static async getForecast(dto: ForecastWeatherDTO): Promise<any> {
-        const url = 'forecast.json';
+        const urlSegment = 'forecast.json';
+        console.log('forecaset dto', dto);
         const params = {
             q: dto.query,
             days: dto.days,
@@ -57,7 +57,7 @@ export class WeatherService {
             tp: dto?.tp
         };
 
-        const {data} = await httpClient.get(url, {params});
+        const {data} = await httpClient.get(urlSegment, {params});
 
         return data;
     }

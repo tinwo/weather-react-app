@@ -6,12 +6,15 @@ import type {ForecastWeatherDTO} from "../interfaces";
 
 export const useForecastWeather = (options: Partial<ForecastWeatherDTO>) => {
     const { params } = useWeatherParams();
+    const defaultDays = 7;
+
     return useQuery({
-        queryKey: ['weather', 'forecast', params.query, params.lang, options.days],
+        queryKey: ['weather', 'forecast', params.query, params.lang, options.dt],
         queryFn: () => WeatherService.getForecast({
             query: params.query,
             lang: params.lang as LanguageCode,
-            days: options.days || ['3'], // значення за замовчуванням
+            days: options.days || defaultDays,
+            dt: options.dt ,
             ...options
         }),
         enabled: !!params.query,
