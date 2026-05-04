@@ -1,12 +1,19 @@
 import {useCurrentWeather} from "../../hooks";
+import Modal from "../Modal/Modal.tsx";
+import {useState} from "react";
 
 
 export const WeatherDashboard = () => {
     const current = useCurrentWeather();
+    const [modalStatus, setModalStatus] = useState<boolean>(false);
 
     if (current.isLoading) return <p>Loading...</p>;
 
     if (current.isError && current.error) return <p>{current.error instanceof Error && current.error.message }</p>
+
+    const onModalHandler = (): void => {
+        setModalStatus(true);
+    }
 
     return (
         <div>
@@ -15,6 +22,7 @@ export const WeatherDashboard = () => {
                 <section>
                     <h1>Зараз у {current.data.location.name}</h1>
                     <p>{current.data.current.temp_c}°C</p>
+                    <button onClick={onModalHandler}>Search</button>
                 </section>
 
                 {/*<section>*/}
@@ -23,6 +31,8 @@ export const WeatherDashboard = () => {
                 {/*        <div key={day.date}>{day.day.avgtemp_c}°C</div>*/}
                 {/*    ))}*/}
                 {/*</section>*/}
+
+                <Modal status={modalStatus} setModalStatus={setModalStatus}></Modal>
             </div>
         </div>
     );

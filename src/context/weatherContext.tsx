@@ -21,6 +21,7 @@ export const WeatherProvider = ({children}: { children: React.ReactNode }) => {
     const DEFAULT_CITY = 'Kyiv';
     const DEFAULT_LANGUAGE = 'uk';
 
+
     const [params, setParams] = useState<WeatherState>({
         query:DEFAULT_CITY,
         lang: DEFAULT_LANGUAGE
