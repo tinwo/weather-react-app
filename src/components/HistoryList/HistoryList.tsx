@@ -1,15 +1,15 @@
 import './HistoryList.css';
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 const HistoryList = () => {
   const [history, setHistory] = useState([]);
 
-  useEffect(() => {
-    const saved = localStorage.getItem('weather_history');
-    if (saved) {
-      setHistory(JSON.parse(saved))
-    }
-  }, [history]);
+  // useEffect(() => {
+  //   const saved = localStorage.getItem('weather_history');
+  //   if (saved) {
+  //     setHistory(JSON.parse(saved))
+  //   }
+  // }, [history]);
 
   const clearHistory = () => {
     localStorage.removeItem('weather_history');
@@ -32,22 +32,22 @@ const HistoryList = () => {
 
 
   return (
-      <div className="history-section">
-        <h3>Збережені:</h3>
-        <button onClick={clearHistory}>Очистити</button>
+    <div className="history-section">
+      <h3>Збережені:</h3>
+      <button onClick={clearHistory}>Очистити</button>
 
-        <div className="history-grid">
-          {history.map((item: any) => (
-              <div key={item.name + item.lat} className="history-item">
-                <span>{item.name}</span>
-                <small>{item.country}</small>
+      <div className="history-grid">
+        {history.map((item: any) => (
+          <div key={item.name + item.lat} className="history-item">
+            <span>{item.name}</span>
+            <small>{item.country}</small>
 
-                <button onClick={() => removeFromHistory(item.name)}>remove</button>
-                {/* Тут можна додати кнопку видалення конкретного запису */}
-              </div>
-          ))}
-        </div>
+            <button onClick={() => removeFromHistory(item.name)}>remove</button>
+            {/* Тут можна додати кнопку видалення конкретного запису */}
+          </div>
+        ))}
       </div>
+    </div>
   );
 };
 

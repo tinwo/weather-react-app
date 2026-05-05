@@ -7,7 +7,7 @@ export class WeatherService {
         const urlSegment = 'current.json';
         const params = {
             q: dto.city,
-            land: dto?.lang
+            lang: dto?.lang
         };
 
         const {data} = await httpClient.get(urlSegment, {params});

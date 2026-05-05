@@ -6,7 +6,7 @@ export interface ForecastWeatherDTO {
     dt?: string
     unixdt?: number;
     hour?: number;
-    lang?: LanguageCode;
+    lang?: string;
     alerts?: string;
     aqi?: string;
     tp?: number;
