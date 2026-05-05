@@ -7,7 +7,7 @@ export const useFutureWeather = (date: Date) => {
     const { params } = useWeatherParams();
     return useQuery({
         queryKey: ['weather','future', params.query, date.toISOString()],
-        queryFn: () => WeatherService.getFuture({
+        queryFn: async () => WeatherService.getFuture({
             query: params.query,
             dt: date,
             lang: params.lang as LanguageCode

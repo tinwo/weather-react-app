@@ -1,4 +1,3 @@
-import type {LanguageCode} from "../../types";
 
 export interface ForecastWeatherDTO {
     query: string;

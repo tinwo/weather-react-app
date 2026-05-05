@@ -1,51 +1,65 @@
 import './HistoryList.css';
-import { useEffect, useState } from "react";
+import { useHistory } from "../../context";
+import { useWeatherParams } from "../../context";
 
 const HistoryList = () => {
-  const [history, setHistory] = useState([]);
+  const { setCity } = useWeatherParams();
+  const { history, clearHistory, removeFromHistory } = useHistory();
 
-  // useEffect(() => {
-  //   const saved = localStorage.getItem('weather_history');
-  //   if (saved) {
-  //     setHistory(JSON.parse(saved))
-  //   }
-  // }, [history]);
-
-  const clearHistory = () => {
-    localStorage.removeItem('weather_history');
-    setHistory([]);
-  };
-
-  const removeFromHistory = (cityName: string) => {
-    const saved = localStorage.getItem('weather_history');
-    if (!saved) return;
-
-    const history = JSON.parse(saved);
-    // Фільтруємо, залишаючи всі міста, крім обраного
-    const updatedHistory = history.filter(item => item.name !== cityName);
-
-    localStorage.setItem('weather_history', JSON.stringify(updatedHistory));
-    // Не забудьте оновити стейт після цього!
-  };
-
-  if (history.length === 0) return null;
-
+  if (history && history.length === 0) return null;
 
   return (
-    <div className="history-section">
-      <h3>Збережені:</h3>
-      <button onClick={clearHistory}>Очистити</button>
+    <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-50">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-semibold text-gray-800 tracking-tight">Історія</h2>
 
-      <div className="history-grid">
-        {history.map((item: any) => (
-          <div key={item.name + item.lat} className="history-item">
-            <span>{item.name}</span>
-            <small>{item.country}</small>
+        {history && history?.length > 0 && (
+          <button
+            onClick={clearHistory}
+            className="text-xs font-medium hover:bg-gray-100 px-8 py-3 rounded-2xl hover:cursor-pointer text-red-400 hover:text-red-600 transition-colors tracking-wider"
+          >
+            Очистити все
+          </button>
+        )}
+      </div>
 
-            <button onClick={() => removeFromHistory(item.name)}>remove</button>
-            {/* Тут можна додати кнопку видалення конкретного запису */}
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {history && history.map((item) => {
+          return (
+            <div
+              onClick={() => {
+                setCity(item.name)
+              }}
+              key={item.name + item.lat}
+              className="group flex items-center justify-between p-3 bg-gray-100 hover:cursor-pointer hover:bg-gray-200 rounded-2xl transition-all duration-200"
+            >
+              <div className="flex flex-col">
+                <span className="text-sm font-medium text-gray-700 leading-tight">
+                  {item.name}
+                </span>
+                <span className="text-[10px] text-gray-400 uppercase tracking-wide">
+                  {item.country}
+                </span>
+              </div>
+
+              <button
+                onClick={() => removeFromHistory(item.name)}
+                className="p-1.5 rounded-full text-gray-300 hover:text-red-400 hover:bg-white transition-all opacity-0 group-hover:opacity-100"
+                title="Видалити"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          )
+        })}
+
+        {history && history?.length === 0 && (
+          <p className="col-span-full text-center py-4 text-sm text-gray-400 italic">
+            Історія пошуку порожня
+          </p>
+        )}
       </div>
     </div>
   );

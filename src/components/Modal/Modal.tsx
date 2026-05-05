@@ -1,7 +1,8 @@
-import './Modal.css';
 import { useEffect, useState } from "react";
 import { useSearchWeather } from "../../hooks";
 import SearchWeatherCard from "../SearchWeatherCard/SearchWeatherCard.tsx";
+import type {SearchLocation} from "../../interfaces";
+import * as React from "react";
 
 interface ModalProps {
   status: boolean;
@@ -43,7 +44,7 @@ const Modal = ({ status, setModalStatus }: ModalProps) => {
       if (!status) {
         setSearchValue('');
         setDebouncedValue('');
-      };
+      }
     }
   }, [status]);
 
@@ -61,7 +62,7 @@ const Modal = ({ status, setModalStatus }: ModalProps) => {
         >
           {/* Header */}
           <div className="px-6 py-4 border-b border-gray-50 flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-gray-800">Search Weather</h2>
+            <h2 className="text-xl font-semibold text-gray-800">Пошук</h2>
             <button onClick={() => setModalStatus(false)} className="text-gray-400 hover:text-gray-600">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -79,7 +80,7 @@ const Modal = ({ status, setModalStatus }: ModalProps) => {
                 type="text"
                 value={searchValue}
                 onChange={onChangeHandler}
-                placeholder="Enter city name..."
+                placeholder="Введіть місто"
                 className="w-full pl-4 pr-12 py-3 bg-gray-100 border-none rounded-2xl focus:ring-2 focus:ring-blue-400 outline-none transition-all placeholder:text-gray-400 text-gray-700"
               />
 
@@ -110,7 +111,7 @@ const Modal = ({ status, setModalStatus }: ModalProps) => {
               )}
 
               <div className="space-y-3">
-                {searchWeather.data?.map((item: any) => (
+                {searchWeather.data?.map((item: SearchLocation): React.ReactElement => (
                   <SearchWeatherCard
                     setModalStatus={setModalStatus}
                     key={item.id}
