@@ -111,7 +111,7 @@ const Modal = ({ status, setModalStatus }: ModalProps) => {
               )}
 
               <div className="space-y-3">
-                {searchWeather.data?.map((item: SearchLocation): React.ReactElement => (
+                {searchWeather.data?.length > 0 && searchWeather.data?.map((item: SearchLocation): React.ReactElement => (
                   <SearchWeatherCard
                     setModalStatus={setModalStatus}
                     key={item.id}
@@ -119,6 +119,24 @@ const Modal = ({ status, setModalStatus }: ModalProps) => {
                   />
                 ))}
               </div>
+
+              { (searchValue.trim().length > 0 && searchWeather.data && !searchWeather.data?.length) &&
+                  <div className="flex flex-col items-center justify-center py-32 animate-in fade-in duration-700">
+                    <p className="text-[15px] tracking-[0.15em] uppercase text-slate-400 font-light">
+                      Результати пошуку
+                    </p>
+
+                    <p className="mt-6 text-l md:text-4xl font-extralight text-slate-900 tracking-tight">
+                      «{searchValue}»
+                    </p>
+
+                    <p className="mt-8 text-slate-400 font-light italic">
+                      За цим запитом нічого не знайдено
+                    </p>
+
+                    <div className="mt-12 w-8 h-[1px] bg-slate-200" />
+                  </div>
+              }
             </div>
           </div>
         </div>
