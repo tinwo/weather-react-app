@@ -30,7 +30,7 @@ const Modal = ({ status, setModalStatus }: ModalProps) => {
   }
 
   const onCloseHandler = (): void => {
-    setSearchValue((prev) => {
+    setSearchValue((_: string): string => {
       return '';
     });
 

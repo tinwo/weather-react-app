@@ -6,7 +6,7 @@ import type {
     SearchWeatherDTO,
     WeatherResponse
 } from "../interfaces";
-import type {WeatherForecastResponse} from "../interfaces/models/forecaset-weather.model.ts";
+import type {WeatherForecastResponse} from "../interfaces";
 
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -32,7 +32,7 @@ export class WeatherService {
         const params = {
             q: dto.query,
         };
-        await delay(2000);
+        await delay(1500);
         const {data} = await httpClient.get<SearchLocation[]>(urlSegment, {params});
 
         return data;
