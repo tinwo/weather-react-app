@@ -1,1 +1,1 @@
-export * from './ForecastBoard.tsx';
+export * from './ForecastBoard';

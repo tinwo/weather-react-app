@@ -111,7 +111,7 @@ const Modal = ({ status, setModalStatus }: ModalProps) => {
               )}
 
               <div className="space-y-3">
-                {searchWeather.data?.length > 0 && searchWeather.data?.map((item: SearchLocation): React.ReactElement => (
+                {searchWeather.data && searchWeather.data?.length > 0 && searchWeather.data?.map((item: SearchLocation): React.ReactElement => (
                   <SearchWeatherCard
                     setModalStatus={setModalStatus}
                     key={item.id}

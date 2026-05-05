@@ -26,7 +26,6 @@ export const WeatherProvider = ({children}: { children: React.ReactNode }) => {
     lang: DEFAULT_LANGUAGE,
   });
 
-
   const resetToCurrent = () => setParams({
     query: DEFAULT_CITY,
     lang: DEFAULT_LANGUAGE
@@ -34,7 +33,6 @@ export const WeatherProvider = ({children}: { children: React.ReactNode }) => {
 
   const setCity = (query: string) => setParams(prev => ({...prev, query}));
   const setLang = (lang: string) => setParams(prev => ({...prev, lang}));
-
 
   return (
       <WeatherContext.Provider

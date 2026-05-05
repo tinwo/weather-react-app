@@ -1,4 +1,3 @@
-import './HistoryList.css';
 import { useHistory } from "../../context";
 import { useWeatherParams } from "../../context";
 

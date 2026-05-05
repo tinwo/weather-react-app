@@ -1,1 +1,1 @@
-export * from './CurrentWeatherCard.tsx';
+export * from './CurrentWeatherCard';

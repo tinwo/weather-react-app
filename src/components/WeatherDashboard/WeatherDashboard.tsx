@@ -1,19 +1,17 @@
 import {useCurrentWeather, useForecastWeather} from "../../hooks";
 import {useState} from "react";
 import {useWeatherParams} from "../../context";
-import HistoryList from "../HistoryList/HistoryList.tsx";
 import LanguageSelect from "../LanguageSelect/LanguageSelect.tsx";
-import Modal from "../Modal/Modal.tsx";
-
-import {ForecastBoard} from "../ForecastBoard";
-import CurrentWeatherCard from "../CurrentWeatherCard/CurrentWeatherCard.tsx";
 import CityTemplates from "../CityTemplates/CityTemplates.tsx";
+import HistoryList from "../HistoryList/HistoryList.tsx";
+import CurrentWeatherCard from "../CurrentWeatherCard/CurrentWeatherCard.tsx";
+import {ForecastBoard} from "../ForecastBoard";
+import Modal from "../Modal/Modal.tsx";
 
 
 export const WeatherDashboard = () => {
   const {params} = useWeatherParams();
   const current = useCurrentWeather();
-  const [days, setDays] = useState(new Date());
   const [langValue, setLangValue] = useState('uk')
 
   const forecast = useForecastWeather({query: params.query, lang: params.lang});

@@ -1,4 +1,3 @@
-import './HourlyForecast.css';
 import HourItem from "../HourCard/HourItem.tsx";
 import type {HourlyForecast} from '../../interfaces'
 

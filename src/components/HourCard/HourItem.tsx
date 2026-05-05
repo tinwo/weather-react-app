@@ -1,4 +1,3 @@
-import './HoursItem.css';
 import type {HourlyForecast} from "../../interfaces";
 
 interface HourItemProps {
