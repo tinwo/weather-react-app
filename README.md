@@ -1,75 +1,178 @@
-# React + TypeScript + Vite
+# 🌤️ Weather React App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Веб-додаток для перевірки погоди з підтримкою кількох мов, прогнозом погоди на кілька днів і історією пошуків.
 
-Currently, two official plugins are available:
+## 📋 Зміст
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- [Функціонал](#функціонал)
+- [Технологічний стек](#технологічний-стек)
+- [Встановлення](#встановлення)
+- [Запуск проєкту](#запуск-проєкту)
+- [Структура проєкту](#структура-проєкту)
+- [API](#api)
+- [Компоненти](#компоненти)
+- [Контексти](#контексти)
 
-## React Compiler
+## ✨ Функціонал
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+- 🔍 **Пошук погоди** - Пошук погоди по назві міста
+- 🌡️ **Поточна погода** - Відображення поточних погодних умов (температура, вологість, швидкість вітру)
+- 📅 **Прогноз погоди** - Погодинний прогноз та прогноз на кілька днів
+- 🌍 **Багатомовна підтримка** - Інтерфейс доступний мовами (українська та інші)
+- 📍 **Популярні міста** - Шаблони для швидкого вибору популярних міст
+- 📜 **Історія пошуків** - Збереження та перегляд історії пошуків міст
+- 🎨 **Адаптивний дизайн** - Оптимізація для мобільних пристроїв та десктопу
 
-Note: This will impact Vite dev & build performances.
+## 🛠️ Технологічний стек
 
-## Expanding the ESLint configuration
+- **React 19** - UI бібліотека
+- **TypeScript** - Типізація JavaScript коду
+- **Vite** - Швидкий білд інструмент
+- **Tailwind CSS** - Утилітарний CSS фреймворк
+- **Axios** - HTTP клієнт для запитів
+- **React Query (@tanstack/react-query)** - Управління серверними даними
+- **React Context API** - Управління глобальним станом
+- **React Compiler** - Оптимізація React компонентів
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📦 Встановлення
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```bash
+# Клонування репозиторію
+git clone <your-repo-url>
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+# Перехід в директорію проєкту
+cd weather-react-app
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Встановлення залежностей
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Запуск проєкту
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Режим розробки
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Додаток буде доступний на `http://localhost:5173`
+
+### Білд для продакшену
+
+```bash
+npm run build
+```
+
+### Перегляд побудованого проєкту
+
+```bash
+npm run preview
+```
+
+### Перевірка стилю коду
+
+```bash
+npm run lint
+```
+
+## 📁 Структура проєкту
+
+```
+src/
+├── components/          # React компоненти
+│   ├── WeatherDashboard/    # Головна сторінка
+│   ├── CurrentWeatherCard/  # Карточка поточної погоди
+│   ├── ForecastBoard/       # Дошка з прогнозом
+│   ├── HourlyForecast/      # Погодинний прогноз
+│   ├── SearchWeatherCard/   # Пошук погоди
+│   ├── HistoryList/         # Історія пошуків
+│   ├── CityTemplates/       # Популярні міста
+│   ├── LanguageSelect/      # Вибір мови
+│   └── Modal/               # Модальне вікно
+├── api/                 # Роботу з API
+│   ├── weather.service.ts   # Сервіс для отримання даних про погоду
+│   └── index.ts
+├── hooks/              # Користувацькі React хуки
+│   ├── useCurrentWeather.ts    # Поточна погода
+│   ├── useForecastWeather.ts   # Прогноз погоди
+│   ├── useFutureWeather.ts     # Майбутня погода
+│   └── useSearchWeather.ts     # Пошук місць
+├── context/            # React Context для глобального стану
+│   ├── weatherContext.tsx      # Контекст погоди
+│   ├── historyContext.tsx      # Контекст історії
+│   └── index.ts
+├── interfaces/         # TypeScript інтерфейси та типи
+│   ├── dtos/               # Дані від API
+│   └── models/             # Моделі для застосунку
+├── config/             # Конфігураційні файли
+│   └── axios.config.ts
+├── types/              # Глобальні типи
+├── utils/              # Утилітарні функції
+│   ├── helpers/
+│   └── consts/
+├── data/               # Статичні дані
+└── App.tsx            # Головний компонент
+
+```
+
+## 🌐 API
+
+Додаток використовує погодний API для отримання даних. Конфігурація API знаходиться в:
+- [src/api/weather.service.ts](src/api/weather.service.ts) - Сервіс для отримання даних про погоду
+- [src/config/axios.config.ts](src/config/axios.config.ts) - Налаштування Axios
+
+## 🧩 Компоненти
+
+### WeatherDashboard
+Головний компонент, що координує всі інші компоненти додатку.
+
+### CurrentWeatherCard
+Відображає поточні погодні умови для обраного міста.
+
+### ForecastBoard
+Показує прогноз погоди на кілька днів.
+
+### HourlyForecast
+Виводить погодинний прогноз для обраного дня.
+
+### SearchWeatherCard
+Компонент для пошуку міст та отримання інформації про них.
+
+### HistoryList
+Показує історію попередніх пошуків.
+
+### CityTemplates
+Пропонує популярні міста для швидкого вибору.
+
+### LanguageSelect
+Дозволяє користувачу змінювати мову інтерфейсу.
+
+## 📊 Контексти
+
+### WeatherContext
+Управління стану погоди та параметрів пошуку:
+- Поточне місто
+- Поточна мова
+- Функції для оновлення стану
+
+### HistoryContext
+Управління історією пошуків:
+- Збереження пошукових запитів
+- Видалення запитів з історії
+
+## 📝 Ліцензія
+
+Цей проєкт відкритий для навчання та розробки.
+
+## 👨‍💻 Розробка
+
+Для внесення змін:
+
+1. Створіть нову гілку (`git checkout -b feature/AmazingFeature`)
+2. Зробіть комміт своїх змін (`git commit -m 'Add some AmazingFeature'`)
+3. Надішліть на GitHub (`git push origin feature/AmazingFeature`)
+4. Відкрийте Pull Request
+
+## 📧 Контакти
+
+Якщо у вас є запитання або пропозиції, будь ласка, відкрийте Issue в репозиторії.

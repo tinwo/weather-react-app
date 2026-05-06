@@ -1,2 +1,2 @@
-export * from './WeatherDashboard'
-export * from './WeatherDashboard.tsx';
+
+export * from './WeatherDashboard';

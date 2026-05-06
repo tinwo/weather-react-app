@@ -2,18 +2,21 @@
 
 import axios from 'axios';
 
-import {getErrorMessage} from "../utils/helpers/get-error-message.ts";
+import { getErrorMessage } from "../utils";
 
 const isDev =  import .meta.env.DEV;
 const apiKey = import .meta.env.VITE_WEATHER_API_KEY;
+const baseURL = import.meta.env.VITE_WEATHER_BASE_URL;
 
-const weatherHTTPClient = axios.create({
-    baseURL: apiKey,
+const prefix = '/api'
+
+export const httpClient = axios.create({
+    baseURL: isDev ? prefix : baseURL,
     timeout: 5000,
 });
 
 // Interceptors: REQUEST
-weatherHTTPClient.interceptors.request.use(
+httpClient.interceptors.request.use(
     (config) => {
     config.params = {
         ...config.params,
@@ -30,7 +33,7 @@ weatherHTTPClient.interceptors.request.use(
 )
 
 // Interceptors: RESPONSE
-weatherHTTPClient.interceptors.response.use((response) => response, (error) => {
+httpClient.interceptors.response.use((response) => response, (error) => {
     let finalMessage;
 
     if (error.response) {
